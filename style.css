@@ -1,0 +1,62 @@
+* {
+    margin:0;
+    font-family: "Roboto", sans-serif;
+    -moz-box-sizing: border-box; box-sizing: border-box;
+  }
+ html {
+    font-size: 16px;
+  }
+body {
+    position : relative;
+    padding-bottom : 50px;
+    height : 100%;
+}
+header {
+    width : 100%;
+    min-height : 100px;
+    background : linear-gradient(to left, rgb(133, 132, 108),rgb(184, 231, 53));
+    margin-bottom: max(3vh, 30px);
+}
+
+.informationsFrame {
+    font-size: clamp(1.25rem, 1vw, 1.75rem);
+    border : 1px solid black;
+    width : max(550px, 50%);
+    margin : auto;
+    display: flex;
+    flex-direction: column;
+}
+.global-temp {
+    display: flex;
+}
+.localisation {
+    display: flex;
+}
+.weather-text {
+    display: flex;
+}
+.feel-temp {
+    display: flex;
+}
+.wind-speed {
+    display: flex;
+}
+#mapid { 
+    width : max(550px, 50%);
+    min-height : 550px;
+    margin : auto;
+    border : 2px solid black;
+}
+
+
+footer {
+    position : absolute;
+    width : 100%;
+    height : 50px;
+    background : linear-gradient(to left, rgb(133, 132, 108),rgb(33, 131, 82));
+    display : flex;
+    margin-top: max(3vh, 30px);
+}
+footer p {
+    margin : auto;
+}
