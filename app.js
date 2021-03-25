@@ -31,6 +31,7 @@ function geo_success(position) {
 function onMapClick(e) {
   latitude = e.latlng.lat;
   longitude = e.latlng.lng;
+  mapid.classList.add("mapIsClose");
   window.fetch('http://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=19ce656d059c9d9b4b3c29a4a3cc734d&units=metric&lang=fr')
             .then(response => response.json())
             .then(json => {
@@ -100,4 +101,21 @@ mymap.addEventListener('click', onMapClick);
 
 let userPosition = navigator.geolocation.getCurrentPosition(geo_success, geo_error);
 
+ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+   anchor.addEventListener('click', function (e) {
+      e.preventDefault();
 
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+           behavior: 'smooth'
+       });
+  });
+ });
+
+let mapButton = document.getElementById("header-button");
+
+function openMap () {
+  mapid.classList.remove("mapIsClose");
+  mapid.classList.add("mapIsOpen");
+}
+
+mapButton.addEventListener("click", openMap);
