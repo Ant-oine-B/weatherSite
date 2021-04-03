@@ -15,12 +15,12 @@ function geo_success(position) {
                 cityCountry.innerHTML = json.sys.country
                 weatherText.innerHTML = json.weather[0].description
                 feelTemp.innerHTML = Math.round(json.main.feels_like)
-                windSpeed.innerHTML = Math.round(json.wind.speed*3.6)
+                windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
             })
 
     let mymap = L.map('mapid').setView([latitude, longitude], 13);
 
-      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2l6a2lsbCIsImEiOiJja21rZGxnbjcxMDNmMnZxdm1scWs5MDk3In0.7tLpBCEeCsCnVvW_yM7mfg', {
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2l6a2lsbCIsImEiOiJja21rZGxnbjcxMDNmMnZxdm1scWs5MDk3In0.7tLpBCEeCsCnVvW_yM7mfg', { 
           attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
           maxZoom: 18,
           id: 'mapbox/streets-v11',
@@ -28,22 +28,6 @@ function geo_success(position) {
           zoomOffset: -1,
       }).addTo(mymap);
 
-function onMapClick(e) {
-  latitude = e.latlng.lat;
-  longitude = e.latlng.lng;
-  mapid.classList.add("mapIsClose");
-  window.fetch('http://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=19ce656d059c9d9b4b3c29a4a3cc734d&units=metric&lang=fr')
-            .then(response => response.json())
-            .then(json => {
-                console.log(json)
-                globalTemp.innerHTML = Math.round(json.main.temp)
-                cityLocalisation.innerHTML = json.name
-                cityCountry.innerHTML = json.sys.country
-                weatherText.innerHTML = json.weather[0].description
-                feelTemp.innerHTML = Math.round(json.main.feels_like)
-                windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
-            })
-}
 mymap.addEventListener('click', onMapClick);
   }
 
@@ -80,9 +64,28 @@ mymap.addEventListener('click', onMapClick);
           zoomOffset: -1,
       }).addTo(mymap);
 
+mymap.addEventListener('click', onMapClick);
+    })
+  }
+
+let userPosition = navigator.geolocation.getCurrentPosition(geo_success, geo_error);
+
+/* set the localisation from event click on the map */
+
 function onMapClick(e) {
   latitude = e.latlng.lat;
   longitude = e.latlng.lng;
+    if (mapid.classList.contains("mapIsOpen")) {
+      mapid.classList.add("mapIsClose");
+    }
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+     e.preventDefault();
+     document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+      });
+ });
+});
   window.fetch('http://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=19ce656d059c9d9b4b3c29a4a3cc734d&units=metric&lang=fr')
             .then(response => response.json())
             .then(json => {
@@ -92,30 +95,26 @@ function onMapClick(e) {
                 cityCountry.innerHTML = json.sys.country
                 weatherText.innerHTML = json.weather[0].description
                 feelTemp.innerHTML = Math.round(json.main.feels_like)
-                windSpeed.innerHTML = Math.round(json.wind.speed*3.6)
+                windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
             })
 }
-mymap.addEventListener('click', onMapClick);
-    })
-  }
 
-let userPosition = navigator.geolocation.getCurrentPosition(geo_success, geo_error);
+/* header button : focus on the map for the selection of a new localisation */
 
- document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-   anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-           behavior: 'smooth'
-       });
-  });
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+     e.preventDefault();
+     document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+      });
  });
+});
 
 let mapButton = document.getElementById("header-button");
 
 function openMap () {
-  mapid.classList.remove("mapIsClose");
-  mapid.classList.add("mapIsOpen");
+ mapid.classList.remove("mapIsClose");
+ mapid.classList.add("mapIsOpen");
 }
 
 mapButton.addEventListener("click", openMap);
