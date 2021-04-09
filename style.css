@@ -54,6 +54,10 @@ header h1::after {
     color :rgb(243, 243, 243);
     font-size: clamp(1.25rem, 1vw, 1.75rem);
 }
+#infoArea, #mapArea, #searchArea{
+    width: 100%;
+    min-height: calc(100vh - 100px);
+}
 .informationsFrame {
     font-size: clamp(1.25rem, 1vw, 1.75rem);
     border : 2px solid rgb(86, 25, 201);
@@ -115,16 +119,15 @@ header h1::after {
     min-height : 550px;
     margin : auto;
     position : relative;
+
 }
 .mapIsOpen {
     animation : opening 2.5s ease-in-out forwards;
 }
-
 @keyframes opening {
     0% 
     {
         position : relative;
-
     }
     50%
     {
@@ -150,7 +153,6 @@ header h1::after {
         position : relative;
         margin : auto;
         width: 80%;
-
     }
     50%
     {
@@ -165,7 +167,9 @@ header h1::after {
     }
 }
 
-
+#searchLocalisation {
+    background-color: blue;
+}
 footer {
     position : absolute;
     color : rgb(86, 25, 201);
