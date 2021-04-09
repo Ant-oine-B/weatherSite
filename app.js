@@ -118,3 +118,36 @@ function openMap () {
 }
 
 mapButton.addEventListener("click", openMap);
+
+
+/* research a localisation by name */
+
+function onSubmitClick() {
+  let userCityRequest = searchInput.value;
+    window.fetch('http://api.openweathermap.org/data/2.5/weather?q='+userCityRequest+'&appid=19ce656d059c9d9b4b3c29a4a3cc734d&units=metric&lang=fr')
+    .then(response => response.json())
+    .then(json => {
+        console.log(json) /*remove it when everything is set*/
+        globalTemp.innerHTML = Math.round(json.main.temp)
+        cityLocalisation.innerHTML = json.name
+        cityCountry.innerHTML = json.sys.country
+        weatherText.innerHTML = json.weather[0].description
+        feelTemp.innerHTML = Math.round(json.main.feels_like)
+        windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+             e.preventDefault();
+             document.querySelector(this.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+              });
+         });
+        });
+  })
+
+
+}
+
+
+submitCity.addEventListener('click', onSubmitClick);
+
