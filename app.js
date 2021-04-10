@@ -78,14 +78,7 @@ function onMapClick(e) {
     if (mapid.classList.contains("mapIsOpen")) {
       mapid.classList.add("mapIsClose");
     }
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-     e.preventDefault();
-     document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-      });
- });
-});
+
   window.fetch('http://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=19ce656d059c9d9b4b3c29a4a3cc734d&units=metric&lang=fr')
             .then(response => response.json())
             .then(json => {
@@ -101,15 +94,6 @@ function onMapClick(e) {
 
 /* header button : focus on the map for the selection of a new localisation */
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-     e.preventDefault();
-     document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-      });
- });
-});
-
 let mapButton = document.getElementById("header-button");
 
 function openMap () {
@@ -120,10 +104,29 @@ function openMap () {
 mapButton.addEventListener("click", openMap);
 
 
+
+let topPosition = document.getElementById("header-ancre");
+
+ /* avoid click when dragging the mouse on the map */
+ 
+let drag = false;
+
+mapid.addEventListener('mousedown', () => drag = false);
+mapid.addEventListener('mousemove', () => drag = true);
+mapid.addEventListener('mouseup', function() { 
+
+  if (drag === false){
+    topPosition.scrollIntoView({
+      behavior:'smooth'
+    })}
+  });
+
+
 /* research a localisation by name */
 
 function onSubmitClick() {
   let userCityRequest = searchInput.value;
+
     window.fetch('http://api.openweathermap.org/data/2.5/weather?q='+userCityRequest+'&appid=19ce656d059c9d9b4b3c29a4a3cc734d&units=metric&lang=fr')
     .then(response => response.json())
     .then(json => {
@@ -134,20 +137,41 @@ function onSubmitClick() {
         weatherText.innerHTML = json.weather[0].description
         feelTemp.innerHTML = Math.round(json.main.feels_like)
         windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-             e.preventDefault();
-             document.querySelector(this.getAttribute('href')).scrollIntoView({
-              behavior: 'smooth'
-              });
-         });
-        });
+        topPosition.scrollIntoView({
+          behavior:'smooth'
+        })
   })
-
-
+    .catch(error => {
+      searchInput.style.color = "red";
+    })
 }
 
-
 submitCity.addEventListener('click', onSubmitClick);
+
+/* gestion of the research input  */
+
+searchInput.onfocus = function() {
+  searchInput.style.color = "black";
+  if (searchInput.value === "Rechercher une ville...") {
+    searchInput.value = "";
+  } 
+}
+searchInput.onblur = function() {
+  if (searchInput.value === "") {
+    searchInput.value = "Rechercher une ville...";
+  }
+}
+
+/* anchor animation */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+     e.preventDefault();
+
+     document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+      });
+    
+ });
+}); 
 
