@@ -9,13 +9,15 @@ integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/k
 crossorigin=""/>
         <title>API Test</title>
     </head>
+    <div id="header-ancre"></div>
     <header>
       <h1>Météo</h1>
-      <a id=header-button href=#mapid><p>Choisir une position</p></a>
+      <a id=header-button href=#mapArea><p>Choisir une position</p></a>
     </header>
     <div class=header-band><p>Avec MétéoMap, accédez en temps réel à la météo de chez vous, mais aussi de partout dans le monde.</p></div>
   <body>
 <div id=infoArea>
+  <h1>Informations météorologiques :</h1>
     <div class=informationsFrame>
       <div class=global-temp><div id=globalTemp>
       </div> °C</div>
@@ -35,16 +37,17 @@ crossorigin=""/>
       <div class=temp-color></div>
       </div>
     </div>
-    <div id=mapArea>
-     <div id="mapid"></div>
+    <div id="mapArea">
+      <h1>Choisir une position :</h1>
+      <div id="mapid" ></div>
     </div>
     <div id=searchArea>
 
-     <div id="searchlocalisation"><label for="name">Nom de la ville :</label>
+     <div id="searchlocalisation"><label for="name"><h1>Nom de la ville :</h1></label>
 
-      <input type="text" id="searchInput" name="city" required
-             minlength="4" maxlength="35" size="40">
-             <a id=submit-city href=#header-button> <input id="submitCity" type="submit" value="Rechercher"></div></a>
+      <input type="text" id="searchInput" value="Rechercher une ville..." name="city" required
+             minlength="4" maxlength="35" size="40" autocomplete="off">
+             <input id="submitCity" type="submit" value="Rechercher"></div>
      </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
