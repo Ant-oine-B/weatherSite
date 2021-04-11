@@ -12,7 +12,14 @@ crossorigin=""/>
     <div id="header-ancre"></div>
     <header>
       <h1>Météo</h1>
-      <a id=header-button href=#mapArea><p>Choisir une position</p></a>
+
+      <div id=header-button>Choisir une position
+      <div id=button-childs>
+        <a class=button-child href=#mapArea>Bouton 1</a>
+        <a class=button-child href=#searchArea>Bouton 2</a>
+      </div>
+    </div>
+   
     </header>
     <div class=header-band><p>Avec MétéoMap, accédez en temps réel à la météo de chez vous, mais aussi de partout dans le monde.</p></div>
   <body>
@@ -42,12 +49,12 @@ crossorigin=""/>
       <div id="mapid" ></div>
     </div>
     <div id=searchArea>
-
-     <div id="searchlocalisation"><label for="name"><h1>Nom de la ville :</h1></label>
+      <h1>Nom de la ville :</h1>
+     <div id="searchlocalisation"><label for="name"></label>
 
       <input type="text" id="searchInput" value="Rechercher une ville..." name="city" required
              minlength="4" maxlength="35" size="40" autocomplete="off">
-             <input id="submitCity" type="submit" value="Rechercher"></div>
+             <input id="submitInput" type="submit" value="Rechercher"></div>
      </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
