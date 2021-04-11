@@ -143,15 +143,17 @@ function onSubmitClick() {
   })
     .catch(error => {
       searchInput.style.color = "red";
+      searchInput.style.border = "2px solid red";
     })
 }
 
-submitCity.addEventListener('click', onSubmitClick);
+submitInput.addEventListener('click', onSubmitClick);
 
 /* gestion of the research input  */
 
 searchInput.onfocus = function() {
-  searchInput.style.color = "black";
+  searchInput.style.color = "rgb(168, 168, 168)";
+  searchInput.style.border = "2px solid rgb(59, 9, 124)";
   if (searchInput.value === "Rechercher une ville...") {
     searchInput.value = "";
   } 
