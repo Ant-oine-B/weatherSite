@@ -16,6 +16,7 @@ function geo_success(position) {
                 weatherText.innerHTML = json.weather[0].description
                 feelTemp.innerHTML = Math.round(json.main.feels_like)
                 windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
+                humidity.innerHTML = json.main.humidity
             })
 
     let mymap = L.map('mapid').setView([latitude, longitude], 13);
@@ -53,6 +54,7 @@ mymap.addEventListener('click', onMapClick);
                 weatherText.innerHTML = json.weather[0].description
                 feelTemp.innerHTML = Math.round(json.main.feels_like)
                 windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
+                humidity.innerHTML = json.main.humidity
             })
     let mymap = L.map('mapid').setView([latitude, longitude], 12);
 
@@ -89,6 +91,7 @@ function onMapClick(e) {
                 weatherText.innerHTML = json.weather[0].description
                 feelTemp.innerHTML = Math.round(json.main.feels_like)
                 windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
+                humidity.innerHTML = json.main.humidity
             })
 }
 
@@ -137,6 +140,7 @@ function onSubmitClick() {
         weatherText.innerHTML = json.weather[0].description
         feelTemp.innerHTML = Math.round(json.main.feels_like)
         windSpeed.innerHTML = Math.round(json.wind.speed*3.6) /*data in ms/s * 3.6 = km/h */
+        humidity.innerHTML = json.main.humidity
         topPosition.scrollIntoView({
           behavior:'smooth'
         })
