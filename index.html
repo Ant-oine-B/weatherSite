@@ -15,8 +15,8 @@ crossorigin=""/>
 
       <div id=header-button>Choisir une position
       <div id=button-childs>
-        <a class=button-child href=#mapArea>Bouton 1</a>
-        <a class=button-child href=#searchArea>Bouton 2</a>
+        <a id=leftButton class=button-child href=#mapArea>Sur la carte</a>
+        <a id=rightButton class=button-child href=#searchArea>Par nom de ville</a>
       </div>
     </div>
    
@@ -24,7 +24,7 @@ crossorigin=""/>
     <div class=header-band><p>Avec MétéoMap, accédez en temps réel à la météo de chez vous, mais aussi de partout dans le monde.</p></div>
   <body>
 <div id=infoArea>
-  <h1>Informations météorologiques :</h1>
+  <h1 id=infoAreaTitle class=mainTitle>Informations météorologiques</h1>
     <div class=informationsFrame>
       <div class=global-temp><div id=globalTemp>
       </div> °C</div>
@@ -41,15 +41,18 @@ crossorigin=""/>
       <div class=wind-speed>Vent :
       <div id=windSpeed>
       </div>km/h</div>
+      <div class=humidity>Humidité :
+        <div id=humidity>
+        </div>%</div>
       <div class=temp-color></div>
       </div>
     </div>
     <div id="mapArea">
-      <h1>Choisir une position :</h1>
+      <h1 id=mapAreaTitle class=mainTitle>Rechercher sur la carte</h1>
       <div id="mapid" ></div>
     </div>
     <div id=searchArea>
-      <h1>Nom de la ville :</h1>
+      <h1 id=searchAreaTitle class=mainTitle>Rechercher par nom de ville</h1>
      <div id="searchlocalisation"><label for="name"></label>
 
       <input type="text" id="searchInput" value="Rechercher une ville..." name="city" required
